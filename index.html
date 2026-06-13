@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookReader</title>
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@900&family=Cinzel:wght@700;900&family=Cormorant+Garamond:ital,wght@1,300&family=Almendra:wght@700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {    
+        background: url(klein3.jpg) center center / cover no-repeat fixed;
+        min-height: 100vh;
+        padding: 40px 20px;
+    }
+
+    /* ── LEFT SIDEBAR ── */
+    .table {
+        border: 2px solid black;
+        padding: 30px 20px;
+        width: 15%;
+        float: left;
+        background-color: rgba(2, 27, 34, 0.88);
+        border-radius: 30px;
+        color: white;
+        text-align: center;
+        display: grid;
+        grid-template-columns: auto;
+        gap: 10px;
+        backdrop-filter: blur(4px);
+    }
+
+    .book {
+        border: 2px solid white;
+        padding: 14px 10px;
+        width: 100%;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: border-color 0.2s;
+    }
+
+    .book a {
+        text-decoration: none;
+        color: white;
+        font-family: 'Cinzel', serif;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+    }
+
+    .book:hover { border-color: #c8aa60; }
+
+    /* ── BUTTONS ── */
+    button {
+        font-family: 'Cinzel', serif;
+        font-weight: 900;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #e8e0d0;
+        background: transparent;
+        border: 1.5px solid #b0a080;
+        border-radius: 2px;
+        padding: 11px 24px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.35s, border-color 0.35s;
+    }
+
+    button .fill {
+        position: absolute;
+        inset: 0;
+        background: #c8aa60;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 0;
+    }
+
+    button span {
+        position: relative;
+        z-index: 1;
+    }
+
+    button::before {
+        content: '';
+        position: absolute;
+        top: -2px; left: -2px;
+        width: 7px; height: 7px;
+        border-style: solid;
+        border-color: #c8aa60;
+        border-width: 2px 0 0 2px;
+        transition: width 0.3s, height 0.3s, border-color 0.3s;
+        z-index: 2;
+    }
+
+    button::after {
+        content: '';
+        position: absolute;
+        bottom: -2px; right: -2px;
+        width: 7px; height: 7px;
+        border-style: solid;
+        border-color: #c8aa60;
+        border-width: 0 2px 2px 0;
+        transition: width 0.3s, height 0.3s, border-color 0.3s;
+        z-index: 2;
+    }
+
+    button:hover .fill       { transform: scaleX(1); }
+    button:hover             { color: #1a1108; border-color: #c8aa60; }
+    button:hover::before,
+    button:hover::after      { border-color: #1a1108; width: 10px; height: 10px; }
+    button:active            { transform: scale(0.97); }
+
+    /* ── RIGHT DISPLAY ── */
+    .disp {
+        border: 2px solid black;
+        width: 60%;
+        float: right;
+        background-color: rgba(2, 27, 34, 0.88);
+        border-radius: 30px;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+    }
+
+    /* ── VOLUME CARD ── */
+    .volume-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 2.5rem 2rem;
+        animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .book-cover-img {
+        width: 180px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 6px;
+        display: block;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+
+    .vol-title {
+        font-family: 'Cinzel', serif;
+        font-weight: 900;
+        font-size: 18px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #e8e0d0;
+        text-align: center;
+    }
+
+    .btn-row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn-row a { text-decoration: none; }
+
+    .placeholder-msg {
+        font-family: 'Cinzel', serif;
+        font-size: 14px;
+        color: #4a6070;
+        letter-spacing: 0.1em;
+        text-align: center;
+        padding: 3rem;
+    }
+
+    /* ── VOLUME LINK HOVER COLORS ── */
+    .Vol1:hover { color: #b22222; }
+    .Vol2:hover { color: #c0c0c0; }
+    .Vol3:hover { color: #4169e1; }
+    .Vol4:hover { color: #228b22; }
+    .Vol5:hover { color: #ff2400; }
+    .Vol6:hover { color: #ffd700; }
+    .Vol7:hover { color: #6a0dad; }
+    .Vol8:hover { color: #8000ff; }
+    .Vol9:hover { color: #7df9ff; }
+
+    /* ── BOOK BUTTON HOVER COLORS ── */
+    .Book1:hover { background-color: #8b0000 !important; color: #ffffff !important; border-color: #f8e287 !important; }
+    .Book2:hover { background-color: #bfc5cc !important; color: #1a1a1a !important; border-color: #e8e8e8 !important; }
+    .Book3:hover { background-color: #2563eb !important; color: #ffffff !important; border-color: #f8e287 !important; }
+    .Book4:hover { background-color: #10b981 !important; color: #ffffff !important; border-color: #355e38 !important; }
+    .Book5:hover { background-color: #ff4500 !important; color: #ffffff !important; border-color: #e6be3f !important; }
+    .Book6:hover { background-color: #ffd700 !important; color: #1a1a1a !important; border-color: #b8860b !important; }
+    .Book7:hover { background-color: #6d28d9 !important; color: #ffffff !important; border-color: #4c1d95 !important; }
+    .Book8:hover { background: linear-gradient(purple, gold) !important; color: #ffffff !important; border-color: #e6be3f !important; }
+    .Book9:hover { background: linear-gradient(#00e5ff, #8a2be2) !important; color: #e0f7ff !important; border-color: #8b5cf6 !important; }
+
+</style>
+
+<body>
+
+    <!-- ── DIV 1: Sidebar navigation ── -->
+    <div class="table">
+        <div class="book">
+            <a href="" class="Vol1" onclick="Disp('vol1'); return false;"><b>Volume 1 - Clown</b></a>
+        </div>
+        <div class="book">
+            <a href="" class="Vol2" onclick="Disp('vol2'); return false;"><b>Volume 2 - Faceless</b></a>
+        </div>
+        <div class="book">
+            <a href="" class="Vol3" onclick="Disp('vol3'); return false;"><b>Volume 3 - Traveller</b></a>
+        </div>
+        <div class="book">
+            <a href="" class="Vol4" onclick="Disp('vol4'); return false;"><b>Volume 4 - Undying</b></a>
+        </div>
+        <div class="book">
+            <a href="" class="Vol5" onclick="Disp('vol5'); return false;"><b>Volume 5 - Red Priest</b></a>
+        </div>
+        <div class="book">
+            <a href="" class="Vol6" onclick="Disp('vol6'); return false;"><b>Volume 6 - Lightseeker</b></a>
+        </div>
+        <div class="book">
+            <a href="" class="Vol7" onclick="Disp('vol7'); return false;"><b>Volume 7 - The Hanged Man</b></a>
+        </div>
+        <div class="book">
+            <a href="" class="Vol8" onclick="Disp('vol8'); return false;"><b>Volume 8 - Fool</b></a>
+        </div>
+        <div class="book">
+            <a href="" class="Vol9" onclick="Disp('vol9'); return false;"><b>Volume 9 - Side Stories</b></a>
+        </div>
+    </div>
+
+    <!-- ── DIV 2: Volume card display ── -->
+    <div class="disp">
+        <div id="content-area">
+            <p class="placeholder-msg">Select a volume to begin</p>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    const volumes = {
+        vol1: { title: "Volume 1: Clown",         num: 1, cover: "Vol1.jpg", read: "Clown - LotM Vol. 1.pdf",         download: "Clown - LotM Vol. 1.pdf"         },
+        vol2: { title: "Volume 2: Faceless",       num: 2, cover: "Vol2.jpg", read: "Faceless - LotM Vol. 2.pdf",       download: "Faceless - LotM Vol. 2.pdf"       },
+        vol3: { title: "Volume 3: Traveller",      num: 3, cover: "Vol3.jpg", read: "Traveler - LotM Vol. 3.pdf",       download: "Traveler - LotM Vol. 3.pdf"       },
+        vol4: { title: "Volume 4: Undying",        num: 4, cover: "Vol4.jpg", read: "Undying - LotM Vol. 4.pdf",        download: "Undying - LotM Vol. 4.pdf"        },
+        vol5: { title: "Volume 5: Red Priest",     num: 5, cover: "Vol5.jpg", read: "Red Priest - LotM Vol. 5.pdf",     download: "Red Priest - LotM Vol. 5.pdf"     },
+        vol6: { title: "Volume 6: Lightseeker",    num: 6, cover: "Vol6.jpg", read: "Lightseeker - LotM Vol. 6.pdf",    download: "Lightseeker - LotM Vol. 6.pdf"    },
+        vol7: { title: "Volume 7: The Hanged Man", num: 7, cover: "Vol7.jpg", read: "The Hanged Man - LotM Vol. 7.pdf", download: "The Hanged Man - LotM Vol. 7.pdf" },
+        vol8: { title: "Volume 8: Fool",           num: 8, cover: "Vol8.jpg", read: "Fool - LotM Vol. 8.pdf",           download: "Fool - LotM Vol. 8.pdf"           },
+        vol9: { title: "Volume 9: Side Stories",   num: 9, cover: "Vol9.jpg", read: "Side Stories - LotM Vol. 9.pdf",   download: "Side Stories - LotM Vol. 9.pdf"   },
+    };
+
+    function Disp(key) {
+        const vol = volumes[key];
+        const n   = vol.num;
+        const el  = document.getElementById("content-area");
+
+        el.innerHTML = `
+            <div class="volume-card">
+                <img class="book-cover-img" src="${vol.cover}" alt="${vol.title}" />
+                <p class="vol-title">${vol.title}</p>
+                <div class="btn-row">
+                    <a href="${vol.read}" target="_self">
+                        <button class="Book${n}">
+                            <div class="fill"></div>
+                            <span>Read</span>
+                        </button>
+                    </a>
+                    <a href="${vol.download}" target="_self" download>
+                        <button class="Book${n}">
+                            <div class="fill"></div>
+                            <span>Download</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        `;
+    }
+
+</script>
+</html>

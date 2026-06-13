@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookReader</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Almendra:wght@700&family=Cinzel+Decorative:wght@900&family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@1,300&family=IM+Fell+English:ital@0;1&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url('klein2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .welcome {
+            border: 2px solid #000000;
+            border-radius: 18px;
+            background-color: rgba(4, 44, 55, 0.95); /* Added slight opacity to appreciate the background */
+            padding: 60px 40px;
+            width: 100%;
+            max-width: 550px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            font-size: 3.5rem; /* Scalable font sizes */
+            color: white;
+            line-height: 1.2;
+            width: 100%;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #b0a080; /* Replaced <hr> for cleaner styling */
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            font-family: 'IM Fell English', serif; 
+            font-style: italic;
+            letter-spacing: 0.15em;
+            font-size: 1.8rem;
+            color: #e8e0d0;
+            margin-bottom: 40px;
+        }
+
+        /* Wrapper to remove default link lines */
+        .btn-link {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        button {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #e8e0d0;
+            background: transparent;
+            border: 1.5px solid #b0a080;
+            border-radius: 2px;
+            padding: 18px 50px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        /* Corner accents */
+        button::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: 8px;
+            height: 8px;
+            border-style: solid;
+            border-color: #c8aa60;
+            border-width: 2px 0 0 2px; 
+            transition: all 0.3s ease;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            right: -3px;
+            width: 8px;
+            height: 8px;
+            border-style: solid;
+            border-color: #c8aa60;
+            border-width: 0 2px 2px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effects */
+        button:hover {
+            color: #ffffff;
+            border-color: #D4AF6A;
+            background-color: rgba(212, 175, 106, 0.05);
+            box-shadow: 0 0 15px rgba(212, 175, 106, 0.2);
+        }
+
+        button:hover::before,
+        button:hover::after {
+            width: 14px;
+            height: 14px;
+            border-color: #ffffff;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.3rem; }
+            button { padding: 15px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="welcome">
+        <h1>LORD OF MYSTERIES</h1>
+        <h2>All Volume Collection</h2>
+        <a href="index.html" target="_self" class="btn-link">
+            <button>Click Here</button>
+        </a>
+    </div>
+
+</body>
+</html>
